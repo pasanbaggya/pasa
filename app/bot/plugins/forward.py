@@ -6,10 +6,7 @@ from ..utils import forward_message
 
 
 def forward_filter(_, __, m: Message):
-    for chats in Config.JUNCTION_CHATS:
-        if m.chat.id == chats:
-            return True
-    return False
+    return any(m.chat.id == chats for chats in Config.JUNCTION_CHATS)
 
 
 @JunctionBot.on_message(filters.create(forward_filter) & filters.incoming)
